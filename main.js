@@ -7,6 +7,7 @@
 // The adapter-core module gives you access to the core ioBroker functions
 // you need to create an adapter
 const utils = require("@iobroker/adapter-core");
+const WebSocket = require("ws");
 
 // Load your modules here, e.g.:
 // const fs = require("fs");
@@ -33,6 +34,16 @@ class SbahnMuenchen extends utils.Adapter {
 	 */
 	async onReady() {
 		// Initialize your adapter here
+
+		const ws = new WebSocket("wss://tralis.sbahnm.geops.de/ws");
+
+		ws.on("open", function open() {
+			ws.send("GET timetable_8006189");
+		});
+
+		ws.on("message", function incoming(data) {
+			console.log(data);
+		});
 
 		// The adapters config (in the instance object everything under the attribute "native") is accessible via
 		// this.config:
