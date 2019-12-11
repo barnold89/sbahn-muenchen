@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 /*
  * Created with @iobroker/create-adapter v1.18.0
@@ -6,8 +6,8 @@
 
 // The adapter-core module gives you access to the core ioBroker functions
 // you need to create an adapter
-const utils = require("@iobroker/adapter-core");
-const WebSocket = require("ws");
+const utils = require('@iobroker/adapter-core');
+const WebSocket = require('ws');
 
 // Load your modules here, e.g.:
 // const fs = require("fs");
@@ -20,13 +20,13 @@ class SbahnMuenchen extends utils.Adapter {
 	constructor(options) {
 		super({
 			...options,
-			name: "sbahn-muenchen",
+			name: 'sbahn-muenchen',
 		});
-		this.on("ready", this.onReady.bind(this));
-		this.on("objectChange", this.onObjectChange.bind(this));
-		this.on("stateChange", this.onStateChange.bind(this));
+		this.on('ready', this.onReady.bind(this));
+		this.on('objectChange', this.onObjectChange.bind(this));
+		this.on('stateChange', this.onStateChange.bind(this));
 		// this.on("message", this.onMessage.bind(this));
-		this.on("unload", this.onUnload.bind(this));
+		this.on('unload', this.onUnload.bind(this));
 	}
 
 	/**
@@ -35,67 +35,38 @@ class SbahnMuenchen extends utils.Adapter {
 	async onReady() {
 		// Initialize your adapter here
 
-		// const ws = new WebSocket("wss://tralis.sbahnm.geops.de/ws");
+		var station = this.config.station;
+		this.log.info('config station: ' + station);
 
-		// const self = this;
-		// ws.on("open", function open() {
-		// 	self.log.info(`connection to websocket open`);
-		// 	ws.send("SUB timetable_8006189");
-		// });
+		const ws = new WebSocket('wss://tralis.sbahnm.geops.de/ws');
 
-		// ws.on("message", function incoming(data) {
-		// 	self.log.info(`incoming websocket message: ${data}`);
-		// });
-
-		// ws.on("close", function close() {
-		// 	self.log.info(`websocket connection closed`);
-		// });
-
-		// The adapters config (in the instance object everything under the attribute "native") is accessible via
-		// this.config:
-		this.log.info("config option1: " + this.config.option1);
-		this.log.info("config option2: " + this.config.option2);
-
-		/*
-		For every state in the system there has to be also an object of type state
-		Here a simple template for a boolean variable named "testVariable"
-		Because every adapter instance uses its own unique namespace variable names can't collide with other adapters variables
-		*/
-		await this.setObjectAsync("testVariable", {
-			type: "state",
-			common: {
-				name: "testVariable",
-				type: "boolean",
-				role: "indicator",
-				read: true,
-				write: true,
-			},
-			native: {},
+		const self = this;
+		ws.on('open', function open() {
+			self.log.info(`connection to websocket open`);
+			ws.send('SUB timetable_8006189');
 		});
 
+		ws.on('message', function incoming(data) {
+			self.log.info(`incoming websocket message: ${data}`);
+
+			await self.setObjectAsync('line', {
+				type: 'state',
+				common: {
+					name: 'line',
+					type: 'string'
+				},
+				native: {}
+			});
+			await self.setStateAsync('line', { val: data.line.name, ack: true });
+		});
+
+		ws.on('close', function close() {
+			self.log.info(`websocket connection closed`);
+		});
+
+				
 		// in this template all states changes inside the adapters namespace are subscribed
-		this.subscribeStates("*");
-
-		/*
-		setState examples
-		you will notice that each setState will cause the stateChange event to fire (because of above subscribeStates cmd)
-		*/
-		// the variable testVariable is set to true as command (ack=false)
-		await this.setStateAsync("testVariable", true);
-
-		// same thing, but the value is flagged "ack"
-		// ack should be always set to true if the value is received from or acknowledged from the target system
-		await this.setStateAsync("testVariable", { val: true, ack: true });
-
-		// same thing, but the state is deleted after 30s (getState will return null afterwards)
-		await this.setStateAsync("testVariable", { val: true, ack: true, expire: 30 });
-
-		// examples for the checkPassword/checkGroup functions
-		let result = await this.checkPasswordAsync("admin", "iobroker");
-		this.log.info("check user admin pw ioboker: " + result);
-
-		result = await this.checkGroupAsync("admin", "admin");
-		this.log.info("check group user admin group admin: " + result);
+		this.subscribeStates('*');
 	}
 
 	/**
@@ -105,7 +76,7 @@ class SbahnMuenchen extends utils.Adapter {
 	onUnload(callback) {
 		
 		try {
-			this.log.info("cleaned everything up...");
+			this.log.info('cleaned everything up...');
 			callback();
 		} catch (e) {
 			callback();
