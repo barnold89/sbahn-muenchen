@@ -13,6 +13,8 @@
 	<script type="text/javascript" src="../../lib/js/materialize.js"></script>
 	<script type="text/javascript" src="../../js/adapter-settings.js"></script>
 
+	<script type="text/javascript" src="stations.js"></script>
+
 	<!-- Load our own files -->
 	<link rel="stylesheet" type="text/css" href="style.css" />
 	<script type="text/javascript" src="words.js"></script>
@@ -38,6 +40,30 @@
 						;
 				}
 			});
+
+			var data = {};
+			stations.forEach(station => {
+				data[station] = null;
+			});
+			this.log.debug(`Bahnhöfe geladen: ${data}`);
+			this.log.debug(`settings: ${settings}`);
+			// if (!settings.station) {
+			// 	socket.emit('getObject', 'system.config', function(error, config) {
+			// 		if (config && config.common && config.common.station) {
+
+			// 		}
+			// 	});
+			// }
+
+			try {
+				$('#station').mautocomplete({
+					minLength: 0,
+					data: data
+				});
+			} catch (e) {}
+
+
+
 			onChange(false);
 			// reinitialize all the Materialize labels on the page if you are dynamically adding inputs:
 			if (M) M.updateTextFields();
@@ -85,6 +111,13 @@
 				<label for="option2" class="translate">option2</label>
 			</div>
 		</div>
+
+		<div class="row">
+            <div class="input-field col s10 m4">
+                <input type="text" id="station" class="value autocomplete" />
+                <label  class="translate" for="station">Bahnhof</label>
+            </div>
+        </div>
 
 	</div>
 

@@ -35,21 +35,21 @@ class SbahnMuenchen extends utils.Adapter {
 	async onReady() {
 		// Initialize your adapter here
 
-		const ws = new WebSocket("wss://tralis.sbahnm.geops.de/ws");
+		// const ws = new WebSocket("wss://tralis.sbahnm.geops.de/ws");
 
-		const self = this;
-		ws.on("open", function open() {
-			self.log.info(`connection to websocket open`);
-			ws.send("SUB timetable_8006189");
-		});
+		// const self = this;
+		// ws.on("open", function open() {
+		// 	self.log.info(`connection to websocket open`);
+		// 	ws.send("SUB timetable_8006189");
+		// });
 
-		ws.on("message", function incoming(data) {
-			self.log.info(`incoming websocket message: ${data}`);
-		});
+		// ws.on("message", function incoming(data) {
+		// 	self.log.info(`incoming websocket message: ${data}`);
+		// });
 
-		ws.on('close', function close() {
-			self.log.info(`websocket connection closed`);
-		});
+		// ws.on("close", function close() {
+		// 	self.log.info(`websocket connection closed`);
+		// });
 
 		// The adapters config (in the instance object everything under the attribute "native") is accessible via
 		// this.config:
