@@ -44,10 +44,14 @@
 			console.log(`stations: ${JSON.stringify(stations)}`);
 			console.log(`settings: ${JSON.stringify(settings)}`);
 
+			var data = stations.map(station => station.name);
+
 			try {
 				$('#station').mautocomplete({
 					minLength: 0,
-					source: stations.map(station => station.name)
+					source: $.map(stations, (station) => {
+						return { label: station.name, value: station }
+					})
 				});
 			} catch (e) {}
 
