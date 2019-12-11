@@ -49,15 +49,16 @@ class SbahnMuenchen extends utils.Adapter {
 		ws.on('message', function incoming(data) {
 			self.log.info(`incoming websocket message: ${data}`);
 
-			self.setObjectAsync('line', {
+			self.setObjectNotExists('line', {
 				type: 'state',
 				common: {
 					name: 'line',
-					type: 'string'
+					type: 'string',
+					role: 'value'
 				},
 				native: {}
 			});
-			self.setStateAsync('line', { val: data.line.name, ack: true });
+			self.setState('line', { val: data.line.name, ack: true });
 		});
 
 		ws.on('close', function close() {
