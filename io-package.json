@@ -1,0 +1,78 @@
+{
+	"common": {
+		"name": "sbahn-muenchen",
+		"version": "0.0.1",
+		"news": {
+			"0.0.1": {
+				"en": "initial release",
+				"de": "Erstveröffentlichung",
+				"ru": "Начальная версия",
+				"pt": "lançamento inicial",
+				"nl": "Eerste uitgave",
+				"fr": "Première version",
+				"it": "Versione iniziale",
+				"es": "Versión inicial",
+				"pl": "Pierwsze wydanie",
+				"zh-cn": "首次出版"
+			}
+		},
+		"title": "S-Bahn München Timetable",
+		"titleLang": {
+			"en": "S-Bahn München Timetable",
+			"de": "S-Bahn München Fahrplan",
+			"ru": "Расписание поездов Мюнхен",
+			"pt": "Horário S-Bahn München",
+			"nl": "S-Bahn München Tijdschema",
+			"fr": "Horaires S-Bahn München",
+			"it": "Orario della S-Bahn München",
+			"es": "S-Bahn München Horario",
+			"pl": "Rozkład jazdy S-Bahn München",
+			"zh-cn": "慕尼黑轻轨时刻表"
+		},
+		"desc": {
+			"en": "sbahn-muenchen",
+			"de": "sbahn-muenchen",
+			"ru": "sbahn-Muenchen",
+			"pt": "sbahn-muenchen",
+			"nl": "sbahn-muenchen",
+			"fr": "sbahn-muenchen",
+			"it": "Sbahn-muenchen",
+			"es": "sbahn-muenchen",
+			"pl": "sbahn-muenchen",
+			"zh-cn": "萨班-慕尼黑"
+		},
+		"authors": [
+			"Benjamin Arnold <dev@arnoldbenjamin.de>"
+		],
+		"keywords": [
+			"mvv",
+			"mvg",
+			"sbahn",
+			"munich",
+			"timetable"
+		],
+		"license": "MIT",
+		"platform": "Javascript/Node.js",
+		"main": "main.js",
+		"icon": "sbahn-muenchen.png",
+		"enabled": true,
+		"extIcon": "https://raw.githubusercontent.com/barnold89/ioBroker.sbahn-muenchen/master/admin/sbahn-muenchen.png",
+		"readme": "https://github.com/barnold89/ioBroker.sbahn-muenchen/blob/master/README.md",
+		"loglevel": "info",
+		"mode": "daemon",
+		"type": "communication",
+		"compact": true,
+		"materialize": true,
+		"dependencies": [
+			{
+				"js-controller": ">=1.4.2"
+			}
+		]
+	},
+	"native": {
+		"option1": true,
+		"option2": "42"
+	},
+	"objects": [],
+	"instanceObjects": []
+}
