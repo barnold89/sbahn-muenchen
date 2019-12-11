@@ -45,7 +45,7 @@
 			console.log(`settings: ${JSON.stringify(settings)}`);
 
 			var data = {};
-			stations.foreach(station => {
+			stations.forEach(station => {
 				data[station.name] = station.id
 			});
 
