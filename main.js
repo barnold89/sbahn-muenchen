@@ -28,7 +28,7 @@ class SbahnMuenchen extends utils.Adapter {
 		// this.on("message", this.onMessage.bind(this));
 		this.on("unload", this.onUnload.bind(this));
 	}
-	
+
 	/**
 	 * Is called when databases are connected and adapter received configuration.
 	 */
@@ -40,11 +40,15 @@ class SbahnMuenchen extends utils.Adapter {
 		const self = this;
 		ws.on("open", function open() {
 			self.log.info(`connection to websocket open`);
-			ws.send("GET timetable_8006189");
+			ws.send("SUB timetable_8006189");
 		});
 
 		ws.on("message", function incoming(data) {
 			self.log.info(`incoming websocket message: ${data}`);
+		});
+
+		ws.on('close', function close() {
+			self.log.info(`websocket connection closed`);
 		});
 
 		// The adapters config (in the instance object everything under the attribute "native") is accessible via
