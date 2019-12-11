@@ -49,7 +49,7 @@ class SbahnMuenchen extends utils.Adapter {
 		ws.on('message', function incoming(data) {
 			self.log.info(`incoming websocket message: ${data}`);
 
-			await self.setObjectAsync('line', {
+			self.setObjectAsync('line', {
 				type: 'state',
 				common: {
 					name: 'line',
@@ -57,7 +57,7 @@ class SbahnMuenchen extends utils.Adapter {
 				},
 				native: {}
 			});
-			await self.setStateAsync('line', { val: data.line.name, ack: true });
+			self.setStateAsync('line', { val: data.line.name, ack: true });
 		});
 
 		ws.on('close', function close() {
