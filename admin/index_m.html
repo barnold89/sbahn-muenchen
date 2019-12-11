@@ -41,17 +41,13 @@
 				}
 			});
 
-			var data = {};
-			stations.forEach(station => {
-				data[station] = null;
-			});
-			console.log(`Bahnhöfe geladen: ${JSON.stringify(data.map((d) => d.name))}`);
+			
 			console.log(`settings: ${JSON.stringify(settings)}`);
 
 			try {
 				$('#station').mautocomplete({
 					minLength: 0,
-					data: data.map((d) => d.name)
+					source: stations.map(station => station.name)
 				});
 			} catch (e) {}
 
