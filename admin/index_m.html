@@ -45,8 +45,8 @@
 			stations.forEach(station => {
 				data[station] = null;
 			});
-			console.log(`Bahnhöfe geladen: ${data}`);
-			console.log(`settings: ${settings}`);
+			console.log(`Bahnhöfe geladen: ${JSON.stringify(data)}`);
+			console.log(`settings: ${JSON.stringify(settings)}`);
 
 			try {
 				$('#station').mautocomplete({
