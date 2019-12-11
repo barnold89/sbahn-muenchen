@@ -45,15 +45,8 @@
 			stations.forEach(station => {
 				data[station] = null;
 			});
-			this.log.debug(`Bahnhöfe geladen: ${data}`);
-			this.log.debug(`settings: ${settings}`);
-			// if (!settings.station) {
-			// 	socket.emit('getObject', 'system.config', function(error, config) {
-			// 		if (config && config.common && config.common.station) {
-
-			// 		}
-			// 	});
-			// }
+			console.log(`Bahnhöfe geladen: ${data}`);
+			console.log(`settings: ${settings}`);
 
 			try {
 				$('#station').mautocomplete({
