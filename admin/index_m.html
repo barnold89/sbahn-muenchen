@@ -45,13 +45,13 @@
 			stations.forEach(station => {
 				data[station] = null;
 			});
-			console.log(`Bahnhöfe geladen: ${JSON.stringify(data)}`);
+			console.log(`Bahnhöfe geladen: ${JSON.stringify(data.map((d) => d.name))}`);
 			console.log(`settings: ${JSON.stringify(settings)}`);
 
 			try {
 				$('#station').mautocomplete({
 					minLength: 0,
-					data: data
+					data: data.map((d) => d.name)
 				});
 			} catch (e) {}
 
